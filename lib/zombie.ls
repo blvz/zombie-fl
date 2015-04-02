@@ -24,6 +24,5 @@ module.exports = ->
           name: file - /^.*\//
           path: file
         }
-        fl.open-document file
 
-        callback? null
+        callback? null fl.open-document file
