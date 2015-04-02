@@ -28,4 +28,8 @@ module.exports = ->
         callback? null fl.open-document file
 
 function parse-document {$, timelines}
-  timelines: timelines.0.DOMTimeline
+  timelines: timelines.0.DOMTimeline.map parse-timeline
+
+function parse-timeline {$, layers}
+  name: $.name
+  layers: layers.0.DOMLayer
