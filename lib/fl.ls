@@ -1,6 +1,6 @@
 require! {
   fs
-  'prelude-ls': { at }
+  'prelude-ls': { at, map, take-while }
 }
 
 module.exports = ->
@@ -11,3 +11,7 @@ module.exports = ->
   trace: -> console.log it
   get-document-DOM: -> @documents.concat! |> at current-doc
   file-exists: -> fs.exists-sync it - /^file:\/\/\//
+  find-document-index: (name) ->
+    @documents
+    |> take-while (.name is name)
+    |> map ~> @documents.index-of it

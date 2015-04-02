@@ -29,6 +29,10 @@ suite 'fl' ->
     .replace /\\/g '/' # '
     equal true fl.file-exists "file:///#p"
 
+  test '#findDocumentIndex(name)' ->
+    equal 0 (first <| fl.find-document-index 'sample1.fla')
+    equal 0 (fl.find-document-index \null).length
+
   # TODO: implement these
   test '#closeAll(prompt=true)'
   test '#closeDocument(doc, prompt=true)'
