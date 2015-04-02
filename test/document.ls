@@ -20,3 +20,6 @@ suite 'Document' ->
     name = 'sample1.fla'
     equal true, (path.index-of name) >= 0
     equal name, doc.name
+
+  test '#timelines' ->
+    equal 1 doc.timelines.length

@@ -23,6 +23,9 @@ module.exports = ->
         fl.documents ++= {
           name: file - /^.*\//
           path: file
-        }
+        } <<< parse-document DOMDocument
 
         callback? null fl.open-document file
+
+function parse-document {$, timelines}
+  timelines: timelines.0.DOMTimeline
