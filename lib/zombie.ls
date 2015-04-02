@@ -34,4 +34,8 @@ function parse-document {$, timelines}
 
 function parse-timeline {$, layers}
   name: $.name
-  layers: layers.0.DOMLayer
+  layers: layers.0.DOMLayer.map parse-layer
+
+function parse-layer {$, frames}
+  animation-type: $.animation-type or \none
+  frames: frames?0.DOMFrame or []
