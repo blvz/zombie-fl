@@ -8,7 +8,7 @@ suite 'Document' ->
   doc  = null
   path = 'test/fixtures/sample1.fla'
 
-  before-each (done) ->
+  before (done) ->
     z.open path, ->
       doc := z.fl.get-document-DOM!
       done ...
