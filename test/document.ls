@@ -15,3 +15,8 @@ suite 'Document' ->
 
   test '#path' ->
     equal path, doc.path
+
+  test '#name' ->
+    name = 'sample1.fla'
+    equal true, (path.index-of name) >= 0
+    equal name, doc.name
