@@ -9,7 +9,7 @@ suite 'Timeline' ->
 
   before (done) ->
     z.open 'test/fixtures/sample1.fla' ->
-      timeline := z.fl.get-document-DOM!timelines.0
+      timeline := z.fl.get-document-DOM!get-timeline!
       done ...
 
   test '#name' ->

@@ -23,3 +23,9 @@ suite 'Document' ->
 
   test '#timelines' ->
     equal 1 doc.timelines.length
+
+  test '#currentTimeline()' ->
+    equal 0 doc.current-timeline
+
+  test '#getTimeline()' ->
+    equal 'Scene 1' doc.get-timeline!name

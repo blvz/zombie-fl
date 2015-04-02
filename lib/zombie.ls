@@ -28,7 +28,9 @@ module.exports = ->
         callback? null fl.open-document file
 
 function parse-document {$, timelines}
+  current-timeline: $.current-timeline |> parse-int |> (- 1)
   timelines: timelines.0.DOMTimeline.map parse-timeline
+  get-timeline: -> @timelines[@current-timeline]
 
 function parse-timeline {$, layers}
   name: $.name
