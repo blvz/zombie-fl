@@ -1,4 +1,5 @@
 require! {
+  fs
   'prelude-ls': { at }
 }
 
@@ -9,3 +10,4 @@ module.exports = ->
   version: 'FAKE 0,0,1,0'
   trace: -> console.log it
   get-document-DOM: -> @documents.concat! |> at current-doc
+  file-exists: -> fs.exists-sync it - /^file:\/\/\//

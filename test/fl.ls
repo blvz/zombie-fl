@@ -1,5 +1,6 @@
 require! {
   '../lib/zombie'
+  path
   chai: { assert: { equal } }
   'prelude-ls': { first, drop }
 }
@@ -13,14 +14,20 @@ suite 'fl' ->
       fl := z.fl
       done ...
 
+  test '#version' ->
+    equal \FAKE (first <| drop 1 <| fl.version is /([A-Z]+)\s\d+,\d+,\d+,\d+/)
+
   test '#documents' ->
     equal true Boolean fl.documents?0?
 
   test '#getDocumentDOM()' ->
     equal fl.documents.0.path, fl.get-document-DOM!path
 
-  test '#version' ->
-    equal \FAKE (first <| drop 1 <| fl.version is /([A-Z]+)\s\d+,\d+,\d+,\d+/)
+  test '#fileExists(uri)' ->
+    p = path.resolve path.join 'test', 'fixtures', 'sample1.fla'
+    .replace /([a-z]):/i '$1|'
+    .replace /\\/g '/' # '
+    equal true fl.file-exists "file:///#p"
 
   # TODO: implement these
   test '#closeAll(prompt=true)'
