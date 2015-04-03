@@ -16,6 +16,9 @@ suite 'fl' ->
         fl := z.fl
         done!
 
+  test '#toString()' ->
+    equal '[object Flash]' fl.to-string!
+
   test '#version' ->
     equal \FAKE (first <| drop 1 <| fl.version is /([A-Z]+)\s\d+,\d+,\d+,\d+/)
 

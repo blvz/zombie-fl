@@ -14,6 +14,9 @@ suite 'Timeline' ->
       ts := z.fl.get-document-DOM!timelines
       done ...
 
+  test '#toString()' ->
+    equal '[object Timeline]' t.to-string!
+
   test '#name' ->
     equal 'Scene 1' t.name
     equal 'Scene 2' ts.1.name

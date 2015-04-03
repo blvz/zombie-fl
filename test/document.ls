@@ -13,6 +13,9 @@ suite 'Document' ->
       doc := z.fl.get-document-DOM!
       done ...
 
+  test '#toString()' ->
+    equal '[object Document]' doc.to-string!
+
   test '#path' ->
     equal path, doc.path
 

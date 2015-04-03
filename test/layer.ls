@@ -14,6 +14,9 @@ suite 'Layer' ->
       ls  := doc.get-timeline!layers
       done ...
 
+  test '#toString()' ->
+    equal '[object Layer]' ls.0.to-string!
+
   test '#animationType' ->
     equal 'motion object' ls.0.animation-type
     equal 'none'          ls.3.animation-type

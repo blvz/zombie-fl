@@ -1,9 +1,10 @@
 require! {
   fs
   'prelude-ls': { at, map, filter, find-index }
+  './Base'
 }
 
-module.exports = ->
+module.exports = class Flash extends Base
   current-doc = -1
 
   documents: []

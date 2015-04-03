@@ -14,6 +14,9 @@ suite 'Layer' ->
       fs  := doc.get-timeline!layers.0.frames
       done ...
 
+  test '#toString()' ->
+    equal '[object Frame]' fs.0.to-string!
+
   test '#actionScript' ->
     equal 'stop();' fs.0.action-script
     equal '' fs.3.action-script
