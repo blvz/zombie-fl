@@ -1,6 +1,7 @@
 require! {
   yauzl
   xml2js: { parse-string }
+  'prelude-ls': { Obj }
   './fl': create-fl
 }
 
@@ -44,6 +45,8 @@ function parse-layer layers, {$, frames}:layer
   if $.parent-layer-index
     parent = parse-layer layers, layers[$.parent-layer-index]
 
+  fs = parse-frames-duration (frames?0.DOMFrame or []).map parse-frame
+
   name: $.name
   locked: $.locked is \true
   outline: $.outline is \true
@@ -62,6 +65,22 @@ function parse-layer layers, {$, frames}:layer
               | \guide    => \guided
               | otherwise => $.layer-type or \normal
 
-  frame-count:~ -> @frames.length
+  frame-count: fs.length
   parent-layer: parent
-  frames: frames?0.DOMFrame or []
+  frames: fs
+
+function parse-frame {$, Actionscript, elements}
+  action-script: Actionscript?0.script.0 or ''
+  name: $.name or ''
+  label-type: $.label-type or ''
+  duration: (parse-int $.duration) or 1
+  start-frame: parse-int $.index
+  is-empty: -> Obj.empty elements.0
+  elements: elements
+
+function parse-frames-duration frames
+  fs = []
+  for f in frames
+    for d in [0 til f.duration]
+      fs[f.start-frame + d] = f
+  fs
