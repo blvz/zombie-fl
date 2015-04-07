@@ -39,6 +39,7 @@ suite 'Layer' ->
 
   test '#frames' ->
     equal 1 ls.0.frames.length
+    equal 0 ls[*-1].frames.length
 
   test '#height' ->
     equal 100 ls.0.height
