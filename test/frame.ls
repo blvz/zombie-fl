@@ -3,7 +3,7 @@ require! {
   chai: { assert: { equal } }
 }
 
-suite 'Layer' ->
+suite 'Frame' ->
   z   = zombie!
   doc = null
   fs  = null
