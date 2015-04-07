@@ -50,5 +50,5 @@ suite 'Frame' ->
     equal 10 fs.11.start-frame
     equal 15 fs.16.start-frame
 
-  test.skip '#elements' ->
+  test '#elements' ->
     equal 3 fs.15.elements.length
