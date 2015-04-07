@@ -1,18 +1,18 @@
-require! <[ ./Base ]>
+require! <[ ./Base ./Element ]>
 
 module.exports = class Frame extends Base
-  ({$, $$}) ->
+  (xml) ->
     return new @@ ... unless @ instanceof @@
 
-    es = $$?elements or []
-    es = [] if es.0 is ''
+    es = xml.$ 'elements/*' .children
 
-    @name          = $.name or ''
-    @elements      = es
-    @duration      = (parse-int $.duration) or 1
-    @label-type    = $.label-type or ''
-    @start-frame   = parse-int $.index
-    @action-script = $$?Actionscript?0.$$.script.0 or ''
+    @name          = (xml.attr \name) or ''
+    @label-type    = (xml.attr \labelType) or ''
+    @duration      = (parse-int xml.attr \duration) or 1
+    @start-frame   =  parse-int xml.attr \index
+    @elements      = es.map Element
+    @action-script = (xml.$ 'Actionscript/script'
+                      .children.0?children.0.raw-data.join '') or ''
 
   is-empty: -> not @elements.length
 

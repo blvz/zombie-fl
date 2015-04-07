@@ -1,39 +1,38 @@
 require! <[ ./Base ./Frame ]>
 
 module.exports = class Layer extends Base
-  ({$, $$}, layers) ->
+  (xml) ->
     return new @@ ... unless @ instanceof @@
 
-    clr    = $.color
-    parent = null
-    fs     = Frame.fill-gaps <| ($$?frames?0.$$.DOMFrame or [])
-                                .map Frame
+    clr = xml.attr \color
+    fs  = Frame.fill-gaps <| (xml.$ 'frames/*' .children).map Frame
 
-    if $.parent-layer-index
-      parent = new Layer layers[$.parent-layer-index], layers
-
-    @name           = $.name
-    @locked         = $.locked is \true
-    @outline        = $.outline is \true
-    @visible        = not ($.visible is \false)
-    @height         = ((parse-int $.height-multiplier) or 1) * 100
     @frames         = fs
     @frame-count    = fs.length
-    @parent-layer   = parent
-    @animation-type = $.animation-type or \none
-    @layer-type     = switch parent?layer-type
-                      | \mask     => \masked
-                      | \guide    => \guided
-                      | otherwise => $.layer-type or \normal
+    @visible        = not ((xml.attr \visible) is \false)
+    @name           =  xml.attr \name
+    @locked         = (xml.attr \locked) is \true
+    @outline        = (xml.attr \outline) is \true
+    @parent-layer   =  xml.attr \parentLayerIndex
+    @animation-type = (xml.attr \animationType) or \none
+    @layer-type     = (xml.attr \layerType) or \normal
+    @height         = ((parse-int xml.attr \heightMultiplier) or 1) * 100
 
     @ <<<
       color:~
         \   -> clr
-        (c) ->
-          clr :=
-            switch typeof c
-            | \string
-              c.to-upper-case!
-            | \number =>
-              \# + ('00000' + (c .|. 0).to-string 16).substr -6
-              .to-upper-case!
+        (c) -> clr := switch typeof c
+                      | \string => c.to-upper-case!
+                      | \number
+                        \# + ('00000' + (c .|. 0).to-string 16)
+                        .substr -6 .to-upper-case!
+
+  @map-parents = (ls) ->
+    for l in ls
+      if l.parent-layer?
+        p = l.parent-layer = l.parent-layer |> parse-int |> (ls .)
+        l.layer-type = switch p.layer-type
+                       | \mask     => \masked
+                       | \guide    => \guided
+                       | otherwise => l.layer-type
+      l

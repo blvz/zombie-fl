@@ -1,6 +1,6 @@
 require! {
   yauzl
-  xml2js: { parse-string }
+  xamel: { parse }
   './dom/Flash'
   './dom/Document'
 }
@@ -19,9 +19,8 @@ module.exports = ->
       return callback? that if err
 
       xml  = ''
-      opts = explicit-children: on
-
       stream.on \data -> xml += it
-      stream.on \end -> parse-string xml, opts, (err, {DOMDocument}) ->
-        fl.documents ++= new Document file, DOMDocument
+      stream.on \end -> parse xml, {cdata: yes} (err, xml) ->
+        return callback? that if err
+        fl.documents ++= new Document file, xml.children.0
         callback? null fl.open-document file
