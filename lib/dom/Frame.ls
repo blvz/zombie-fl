@@ -10,7 +10,7 @@ module.exports = class Frame extends Base
     @label-type    = (xml.attr \labelType) or ''
     @duration      = (parse-int xml.attr \duration) or 1
     @start-frame   =  parse-int xml.attr \index
-    @elements      = es.map Element
+    @elements      = es.map Element.mapper
     @action-script = (xml.$ 'Actionscript/script'
                       .children.0?children.0.raw-data.join '') or ''
 
