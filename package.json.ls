@@ -22,6 +22,7 @@ engines:
 dependencies:
   yauzl:        '^2.2.1'
   xamel:        '^0.3.1'
+  'chroma-js':  '^0.7.2'
   'prelude-ls': '^1.1.1'
 
 dev-dependencies:
