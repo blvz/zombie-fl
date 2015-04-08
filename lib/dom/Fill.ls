@@ -1,4 +1,5 @@
-require! <[ ./Base ../helpers/color ]>
+require! <[ chroma-js ./Base ]>
+require! { '../helpers/color': { fl-rgba } }
 
 module.exports = class Fill extends Base
   (xml) ->
@@ -8,10 +9,10 @@ module.exports = class Fill extends Base
 
     if colors.length is 1
       @style = \solid
-      clr = color colors.0
+      clr = chroma-js colors.0
       @ <<< color:~
-            \   -> clr!
-            (c) -> clr c
+            \   -> fl-rgba clr
+            (c) -> clr := chroma-js c
 
     else if colors.length
       @style       = xml.name.char-at 0 .to-lower-case! + xml.name.substr 1
@@ -35,9 +36,9 @@ function parse-colors xml
   | otherwise       => []
 
 function parse-color xml
-  clr = color xml.attr \color
+  clr = chroma-js xml.attr \color
   clr.alpha parse-float that if xml.attr \alpha
-  clr!
+  fl-rgba clr
 
 function parse-gradient xml
   (xml.$ \GradientEntry .children).map parse-color

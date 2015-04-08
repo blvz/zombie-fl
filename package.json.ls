@@ -22,7 +22,8 @@ engines:
 dependencies:
   yauzl:        '^2.2.1'
   xamel:        '^0.3.1'
-  'chroma-js':  '^0.7.2'
+  # TODO: waiting for PRs to be merged
+  'chroma-js':  'blvz/chroma.js#hex-updates'
   'prelude-ls': '^1.1.1'
 
 dev-dependencies:

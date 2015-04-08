@@ -1,10 +1,11 @@
-require! <[ ./Base ./Frame ../helpers/color ]>
+require! <[ chroma-js ./Base ./Frame ]>
+require! { '../helpers/color': { fl-rgba } }
 
 module.exports = class Layer extends Base
   (xml) ->
     return new @@ ... unless @ instanceof @@
 
-    clr = color xml.attr \color
+    clr = chroma-js xml.attr \color
     fs  = Frame.fill-gaps <| (xml.$ 'frames/*' .children).map Frame
 
     @frames         = fs
@@ -20,8 +21,8 @@ module.exports = class Layer extends Base
 
     @ <<<
       color:~
-        \   -> clr!
-        (c) -> clr c
+        \   -> fl-rgba clr
+        (c) -> clr := chroma-js c
 
   @map-parents = (ls) ->
     for l in ls
