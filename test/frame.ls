@@ -52,3 +52,6 @@ suite 'Frame' ->
 
   test '#elements' ->
     equal 3 fs.15.elements.length
+
+  test '#soundName' ->
+    equal 'fldr/zombie.mp3' fs.20.sound-name

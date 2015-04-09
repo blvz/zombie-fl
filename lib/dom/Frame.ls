@@ -7,6 +7,7 @@ module.exports = class Frame extends Base
     es = xml.$ 'elements/*' .children
 
     @name          = (xml.attr \name) or ''
+    @sound-name    = (xml.attr \soundName) or ''
     @label-type    = (xml.attr \labelType) or ''
     @duration      = (parse-int xml.attr \duration) or 1
     @start-frame   =  parse-int xml.attr \index
