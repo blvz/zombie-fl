@@ -1,7 +1,7 @@
 name: 'zombie-fl'
-version: '0.1.0-alpha.1'
+version: '0.1.0-alpha.2'
 description: 'Headless Flash environment.'
-files: <[ index.js ]>
+files: <[ index.js lib ]>
 
 homepage: \https://github.com/blvz/zombie-fl
 keywords: <[ headless flash fla jsfl adobe ]>
