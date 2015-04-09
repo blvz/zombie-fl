@@ -13,7 +13,7 @@ author:  'Rafael Belvederese <rafael@blvz.im>'
 license: 'MIT'
 
 scripts:
-  prepublish: 'make metadata'
+  prepublish: 'make package.json'
   test:       'make test'
 
 engines:

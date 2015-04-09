@@ -1,5 +1,5 @@
 require! {
-  '../lib/zombie'
+  '..': zombie
   chai: { assert: { equal } }
 }
 

@@ -1,5 +1,5 @@
 require! {
-  '../lib/zombie'
+  '..': zombie
   path
   chai: { assert: { equal } }
   'prelude-ls': { last, first, drop }
